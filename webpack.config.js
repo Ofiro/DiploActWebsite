@@ -38,9 +38,21 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      chunks: 'all',
+        chunks: 'all',
+        cacheGroups: {
+            vendors: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendors',
+                chunks: 'all',
+            },
+            default: {
+                minChunks: 2,
+                priority: -20,
+                reuseExistingChunk: true,
+            },
+        },
     },
-  },
+},
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),
