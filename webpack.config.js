@@ -1,9 +1,8 @@
-const path = require('path');
+import path from 'path';
 
-module.exports = {
-  entry: {
-    main: './src/index.ts',
-  },
+export default {
+  mode: 'production', // Add this line
+  entry: './src/index.ts',
   module: {
     rules: [
       {
@@ -32,30 +31,13 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js',
+    path: path.resolve(process.cwd(), 'dist'),
     clean: true,
   },
-  optimization: {
-    splitChunks: {
-        chunks: 'all',
-        cacheGroups: {
-            vendors: {
-                test: /[\\/]node_modules[\\/]/,
-                name: 'vendors',
-                chunks: 'all',
-            },
-            default: {
-                minChunks: 2,
-                priority: -20,
-                reuseExistingChunk: true,
-            },
-        },
-    },
-},
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(process.cwd(), 'dist'),
     },
     compress: true,
     port: 9000,
