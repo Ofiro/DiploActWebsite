@@ -16,6 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/swiper": "^6.0.0",
+    "compression-webpack-plugin": "^11.1.0",
     "css-loader": "^7.1.2",
     "sass": "^1.77.4",
     "sass-loader": "^14.2.1",
@@ -23,11 +24,13 @@
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
+    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
     "@splidejs/splide": "^4.1.4",
+    "gsap": "npm:@gsap/shockingly@^3.12.5",
     "swiper": "^11.1.4"
   }
 }
