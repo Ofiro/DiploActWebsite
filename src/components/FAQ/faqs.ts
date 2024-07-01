@@ -1,3 +1,6 @@
+import './FAQ.scss';
+import '../../styles/variables.scss'
+
 document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', (event) => {
         const container = document.querySelector('.light_gradient') as HTMLElement | null;
@@ -40,6 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
+    // Add event listeners to FAQ items
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => toggleFaq(item));
+    });
 });
 
 export {};

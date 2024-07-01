@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+.faq_answer_wrapper {
+    max-height: 0;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+    overflow: hidden;
+}
+
+.faq_answer_wrapper.is--active {
+    max-height: 500px;
+    opacity: 1;
+    transform: scale(1);
+    transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+}
+
+.faq_item_question {
+    &:hover {
+        .faq__icon_wrapper {
+            background-color: #b9c1fa;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq_icon_line {
+            background-color: $color-dark-blue;
+            transition: background-color 0.3s ease;
+        }
+    }
+}

@@ -33,14 +33,4 @@ const initSwipers = () => {
 };
 
 document.addEventListener('DOMContentLoaded', initSwipers);
-
-window.addEventListener('resize', () => {
-    try {
-        if (document.querySelector('.swiper-hero-gallery')) {
-            initHeroGallery(Swiper, EffectCoverflow, Autoplay);
-        }
-    } catch (error) {
-        console.error('Error handling window resize:', error);
-    }
-});
-
+//if page has 'news' in its url

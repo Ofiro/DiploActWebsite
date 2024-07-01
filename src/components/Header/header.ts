@@ -1,8 +1,5 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { gsap, ScrollTrigger, ScrollSmoother } from "../../gsap/utils/config";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 type Styles = Record<string, string>;
 
 /**
@@ -215,6 +212,3 @@ function setupHeaderHover(header: HTMLElement, headerState: HeaderState): void {
         }
     });
 }
-
-// ... existing code ...
-// ... existing code ...

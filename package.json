@@ -21,6 +21,7 @@
     "sass": "^1.77.4",
     "sass-loader": "^14.2.1",
     "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.10",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
@@ -29,7 +30,6 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "@splidejs/splide": "^4.1.4",
     "gsap": "npm:@gsap/shockingly@^3.12.5",
     "swiper": "^11.1.4"
   }

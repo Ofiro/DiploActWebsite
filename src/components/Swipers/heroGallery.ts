@@ -3,24 +3,36 @@ export function initHeroGallery(Swiper: any, EffectCoverflow: any, Autoplay: any
     try {
         const isMobile = window.innerWidth <= 991;
 
-        const swiperConfig = {
-            modules: [EffectCoverflow, Autoplay],
+        const mobileConfig = {
+            modules: [Autoplay],
             slidesPerView: 'auto' as const,
-            spaceBetween: 32,
+            spaceBetween: 16,
             autoplay: {
                 delay: 0,
                 disableOnInteraction: false,
             },
-            grabCursor: false,
-            resizeObserver: true,
-            updateOnWindowResize: true,
+            grabCursor: true,
+            loop: true,
+            speed: 3000,
+            effect: 'slide',
+        };
+
+        const desktopConfig = {
+            modules: [EffectCoverflow, Autoplay],
+            slidesPerView: 'auto' as const,
+            spaceBetween: 16,
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+            },
+            grabCursor: true,
             centeredSlides: true,
             loop: true,
-            speed: 6000,
-            effect: isMobile ? 'slide' : 'coverflow',
+            speed: 3000,
+            effect: 'coverflow',
             coverflowEffect: {
                 rotate: 0,
-                stretch: 80,
+                stretch: 50,
                 depth: 20,
                 scale: 0.85,
                 modifier: 1,
@@ -28,10 +40,7 @@ export function initHeroGallery(Swiper: any, EffectCoverflow: any, Autoplay: any
             },
         };
 
-        if (heroGallerySwiper) {
-            heroGallerySwiper.destroy(true, true);
-        }
-
+        const swiperConfig = isMobile ? mobileConfig : desktopConfig;
         heroGallerySwiper = new Swiper('.swiper-hero-gallery', swiperConfig);
     } catch (error) {
         console.error('Error initializing hero gallery Swiper:', error);
