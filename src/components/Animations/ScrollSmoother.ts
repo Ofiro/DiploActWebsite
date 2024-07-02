@@ -9,7 +9,7 @@ export function initializeScrollSmoother(): void {
             ScrollSmoother.create({
                 wrapper: ".page-wrapper",
                 content: ".main-wrapper",
-                smooth: 0.8,
+                smooth: 2,
                 effects: true,
                 normalizeScroll: true,
                 onUpdate: (self: any) => {},

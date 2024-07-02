@@ -2,6 +2,10 @@ import path from 'path';
 import TerserPlugin from 'terser-webpack-plugin';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import CompressionWebpackPlugin from 'compression-webpack-plugin';
+// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'; // Uncomment if you want to analyze the bundle
 
 // Get __dirname equivalent in ES module
 const __filename = fileURLToPath(import.meta.url);
@@ -22,7 +26,7 @@ export default {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader, // Use MiniCssExtractPlugin loader
           'css-loader',
           'sass-loader',
         ],
@@ -30,7 +34,7 @@ export default {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader, // Use MiniCssExtractPlugin loader
           'css-loader',
         ],
       },
@@ -40,23 +44,26 @@ export default {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: '[name].js', // Use [name] to generate main.js and vendor.js
-    path: path.resolve(process.cwd(), 'public'), // Change to 'public'
+    filename: 'bundle.js', // Use a consistent filename
+    path: path.resolve(process.cwd(), 'public'),
     clean: true,
   },
   optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-        },
-      },
-    },
+    splitChunks: false, // Disable chunk splitting
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [
+      new TerserPlugin(),
+      new CssMinimizerPlugin(), // Add CSS minimizer
+    ],
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'styles.css', // Use a consistent filename
+    }),
+    new CompressionWebpackPlugin(), // Add compression plugin
+    // new BundleAnalyzerPlugin(), // Uncomment if you want to analyze the bundle
+  ],
+  devtool: 'source-map', // Add source maps for production
   devServer: {
     static: path.join(__dirname, 'public'),
     compress: true,
@@ -64,6 +71,6 @@ export default {
     server: {
       type: 'http',
     },
-    allowedHosts: 'all', // Allow all hosts including ngrok
+    allowedHosts: 'all',
   },
 };

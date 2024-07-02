@@ -1,5 +1,11 @@
 @import 'variables.scss';
 
+// Mixin for gradient section mask
+@mixin gradient-section-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 30%, black 80%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 30%, black 80%, transparent);
+}
+
 // Outline Button Styles
 // ---------------------------------------------
 /**
@@ -112,6 +118,7 @@ html, body {
                 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 }
 
+
 // Block Wrapper Styles
 // ---------------------------------------------
 /**
@@ -216,11 +223,6 @@ html, body {
     opacity: 1;
 }
 
-.swiper-posts .swiper-wrapper > *:hover {
-    filter: none;
-    opacity: 1;
-}
-
 .swiper-posts .swiper-wrapper:hover > *:not(:hover) {
     filter: grayscale(100%);
     opacity: 0.8;
@@ -265,8 +267,7 @@ html, body {
 
 @media (min-width: 991px) {
     .gradient_section_mask {
-        -webkit-mask-image: linear-gradient(to right, transparent, black 30%, black 80%, transparent);
-        mask-image: linear-gradient(to right, transparent, black 30%, black 80%, transparent);
+        @include gradient-section-mask;
     }
 }
 
@@ -332,4 +333,13 @@ html, body {
 
 .fs-select_list-1:last-child {
     border-bottom: 2px solid;
+}
+
+@media (min-width: 992px) {
+    .transition_wrap {
+        display: flex;
+    }
+}
+body {
+    position: relative !important;
 }

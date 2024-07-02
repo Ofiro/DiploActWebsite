@@ -15,7 +15,6 @@ export function initializeGSAPPlugins(): void {
             if (gsap && !(gsap as any).plugins.SplitText) {
                 gsap.registerPlugin(SplitText);
             }
-            console.log("GSAP plugins registered successfully.");
         } catch (error) {
             console.error("Error registering GSAP plugins:", error);
         }

@@ -8,15 +8,22 @@ export interface AnimationConfig {
     from?: gsap.TweenVars;
     to?: gsap.TweenVars;
     offset?: string | number;
-    ease?: string; // Add default ease property
+    ease?: string;
 }
 
+/**
+ * Interface for section timeline configuration.
+ */
 export interface SectionTimelineConfig {
     trigger: string;
     scrollTrigger?: boolean;
     animations: AnimationConfig[];
     splitText?: { selector: string, type: 'chars' | 'words' | 'lines' }[];
-    multiple?: boolean; // Add this line
+    /**
+     * Indicates if multiple animations can run simultaneously.
+     * Optional property, defaults to false if not specified.
+     */
+    multiple?: boolean;
 }
 
 // Convert sectionConfigs array to a Map for efficient lookups
@@ -157,17 +164,37 @@ const sectionConfigsArray: SectionTimelineConfig[] = [
     splitText: [
         { selector: '.section_hero_header h1', type: 'lines' }
     ]
+   },
+   {
+    trigger: '.section_team',
+    scrollTrigger: true,
+    animations: [
+        { targets: '.section_team .team_member_item', from: { opacity: 0 }, to: { opacity: 1, duration: 1, stagger: 0.5 }, offset: 0 }
+    ]
    }
 ];
 
-// Create a Map from the array
-export const sectionConfigs = new Map(sectionConfigsArray.map(config => [config.trigger, config]));
+export let sectionConfigs: Map<string, SectionTimelineConfig>;
+
+try {
+    if (sectionConfigsArray.length === 0) {
+        throw new Error('sectionConfigsArray is empty.');
+    }
+    sectionConfigs = new Map(sectionConfigsArray.map(config => [config.trigger, config]));
+} catch (error) {
+    console.error('Failed to create sectionConfigs map:', error);
+    sectionConfigs = new Map();
+}
 
 /**
  * Function to get animations based on the trigger.
  * @param trigger - The trigger to search for.
- * @returns The matching SectionTimelineConfig or undefined if not found.
+ * @returns The matching SectionTimelineConfig or an error message if not found.
  */
-export function getAnimationsByTrigger(trigger: string): SectionTimelineConfig | undefined {
-    return sectionConfigs.get(trigger);
+export function getAnimationsByTrigger(trigger: string): SectionTimelineConfig | string {
+    const config = sectionConfigs.get(trigger);
+    if (!config) {
+        return `No animations found for trigger: ${trigger}`;
+    }
+    return config;
 }

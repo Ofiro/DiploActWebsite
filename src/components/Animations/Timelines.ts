@@ -23,7 +23,7 @@ export function createSectionTimeline(config: SectionTimelineConfig): gsap.core.
         const tl = gsap.timeline({
             scrollTrigger: config.scrollTrigger ? {
                 trigger: element,
-                start: 'top 80%', // Adjusted to start earlier
+                start: 'top 90%', // Adjusted to start earlier
                 toggleActions: 'play reverse play reverse',
             } : undefined
         });
